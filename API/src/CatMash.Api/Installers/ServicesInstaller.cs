@@ -2,6 +2,7 @@
 using CatMash.Domain.Interface;
 using CatMash.Domain.Interface.Business;
 using CatMash.Domain.Interface.Repository;
+using CatMash.Infrastructure.Data;
 using CatMash.Infrastructure.Data.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
