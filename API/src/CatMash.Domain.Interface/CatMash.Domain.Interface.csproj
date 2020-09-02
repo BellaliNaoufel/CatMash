@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CatMash.Domain.Entities\CatMash.Domain.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
