@@ -12,6 +12,7 @@ namespace CatMash.Front.Installers
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<ICatsBusiness, CatsBusiness>();
+
             services.AddOptions<CatsApiSettings>()
                .Configure<IConfiguration>((settings, config) =>
                {
