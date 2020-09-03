@@ -4,6 +4,7 @@ using CatMash.Domain.Interface.Business;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -22,48 +23,23 @@ namespace CatMash.Domain.Business
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Cat> GetCatById(string dataUrl, string id)
+        public async Task<Cat> GetCatById(string id)
         {
-            using (var response = await _httpclient.GetAsync(dataUrl))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var apiResult = await response.Content.ReadAsStringAsync();
-
-                    var images = JsonConvert.DeserializeObject<ApiResponse>(apiResult).Images;
-
-                    return images.Where(x => x.Id.Equals(id))
-                                 .Select(x => new Cat() { Id = x.Id, Url = x.Url, Score = 0 })
-                                 .FirstOrDefault();
-                }
-                return null;
-            }
+            return await _unitOfWork.catRepository.GetByIdAsync(id);
         }
 
-        public async Task<(Cat, Cat)> GetRandomTwoCats(string apiUrl)
+        public async Task ResetDataBaseFromApi(string dataUrl)
         {
-            var catsList = await GetAllCats(apiUrl);
 
-            Random random = new Random();
+            var catListFromDb = await _unitOfWork.catRepository.GetAllAsync();
 
-            var firstItemIndex = random.Next(0, catsList.Count() - 1);
+            _unitOfWork.catRepository.RemoveRange(catListFromDb);
 
-            var secondItemIndex = 0;
-            do
-            {
-                secondItemIndex = random.Next(0, catsList.Count() - 1);
-            } while (firstItemIndex == secondItemIndex);
+            await _unitOfWork.CommitAsync();
 
-            return (catsList.ElementAt(firstItemIndex), catsList.ElementAt(secondItemIndex));
-        }
+            var catListFromApi = await GetAllCatsFromApi(dataUrl);
 
-        public async void ResetDataBaseFromApi(string dataUrl)
-        {
-            var aaa = await _unitOfWork.catRepository.GetAllAsync();
-
-            var catList = await GetAllCatsFromApi(dataUrl);
-
-            foreach (Cat cat in catList.ToArray())
+            foreach (Cat cat in catListFromApi)
             {
                 await _unitOfWork.catRepository.AddAsync(cat);
             }
@@ -81,16 +57,39 @@ namespace CatMash.Domain.Business
 
                     var images = JsonConvert.DeserializeObject<ApiResponse>(apiResult).Images;
 
-                    return images.Select(x => new Cat() { Id = x.Id, Url = x.Url, Score = 0 });
+                    return images.Select(x => new Cat { Id = x.Id, Url = x.Url, Score = 0 });
 
                 }
                 return null;
             }
         }
 
-        public async Task<IEnumerable<Cat>> GetAllCats(string dataUrl)
+        public async Task<IEnumerable<Cat>> GetAllCats()
         {
             return await _unitOfWork.catRepository.GetAllAsync();
+        }
+
+        public async Task<IEnumerable<Cat>> GetRandomTwoCats()
+        {
+            var catsList = await GetAllCats();
+
+            Random random = new Random();
+
+            var firstItemIndex = random.Next(0, catsList.Count() - 1);
+
+            int secondItemIndex;
+
+            do
+            {
+                secondItemIndex = random.Next(0, catsList.Count() - 1);
+            } while (firstItemIndex == secondItemIndex);
+
+            return new[] { catsList.ElementAt(firstItemIndex), catsList.ElementAt(secondItemIndex) };
+        }
+
+        public Task<Cat> UpdateCat(Cat cat)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using CatMash.Domain.Interface;
+using CatMash.Infrastructure.Data;
 using CatMash.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +13,8 @@ namespace CatMash.Front.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<CatMashDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")));
+            services.AddDbContext<CatMashDbContext>(options => options.UseSqlite(configuration.GetConnectionString("SqLite")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

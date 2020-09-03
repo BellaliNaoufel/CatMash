@@ -56,5 +56,12 @@ namespace CatMash.Infrastructure.Data.Repository
         {
             return Context.Set<TEntity>().SingleOrDefaultAsync(predicate);
         }
+
+        public void  Update(TEntity entity)
+        {
+            Context.Set<TEntity>().Attach(entity);
+            Context.Entry(entity).State = EntityState.Modified;
+        }
+
     }
 }

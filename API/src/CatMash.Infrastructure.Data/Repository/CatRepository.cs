@@ -2,11 +2,6 @@
 using CatMash.Domain.Interface.Repository;
 using CatMash.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CatMash.Infrastructure.Data.Repository
@@ -20,7 +15,7 @@ namespace CatMash.Infrastructure.Data.Repository
         public CatRepository(CatMashDbContext context)
        : base(context) { }
 
-        public async Task<Cat> GetCatByIdAsync(string id)
+        public async Task<Cat> GetByIdAsync(string id)
         {
             return await DbContext.Cats.SingleOrDefaultAsync(x => x.Id.Equals(id));
         }
