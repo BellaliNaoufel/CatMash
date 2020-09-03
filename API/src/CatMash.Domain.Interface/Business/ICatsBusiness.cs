@@ -12,6 +12,6 @@ namespace CatMash.Domain.Interface.Business
         Task ResetDataBaseFromApi(string dataUrl);
         Task<Cat> GetCatById(string id);
         Task<IEnumerable<Cat>> GetRandomTwoCats();
-        Task<Cat> UpdateCat(Cat cat);
+        Task UpdateCat(Cat catToUpdate, Cat cat);
     }
 }
