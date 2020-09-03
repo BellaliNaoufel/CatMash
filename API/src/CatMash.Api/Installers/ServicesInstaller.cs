@@ -1,9 +1,7 @@
 ﻿using CatMash.Domain.Business;
 using CatMash.Domain.Interface;
 using CatMash.Domain.Interface.Business;
-using CatMash.Domain.Interface.Repository;
-using CatMash.Infrastructure.Data;
-using CatMash.Infrastructure.Data.Repository;
+using CatMash.Front.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +11,12 @@ namespace CatMash.Front.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ICatsBusiness, CatsBusiness>();
+            services.AddOptions<CatsApiSettings>()
+               .Configure<IConfiguration>((settings, config) =>
+               {
+                   config.GetSection("CatsApiSettings").Bind(settings);
+               });
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CatMash.Front.Extensions;
+using CatMash.Infrastructure.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,12 +34,14 @@ namespace CatMash.Api
         public void Configure(IApplicationBuilder app,
             IWebHostEnvironment env,
             IApiVersionDescriptionProvider provider,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            CatMashDbContext context)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            context.Database.EnsureCreated();
 
             app.UseHttpsRedirection();
 

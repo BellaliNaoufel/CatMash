@@ -12,12 +12,6 @@ namespace CatMash.Front.Installers
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
-            //services.AddControllersWithViews();
-            //// In production, the Angular files will be served from this directory
-            //services.AddSpaStaticFiles(configuration =>
-            //{
-            //    configuration.RootPath = "ClientApp/dist";
-            //});
 
             // configure api versionning
             services.AddVersionedApiExplorer(

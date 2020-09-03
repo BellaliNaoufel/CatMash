@@ -8,9 +8,10 @@ namespace CatMash.Domain.Interface.Business
 {
     public interface ICatsBusiness
     {
-        Task<IEnumerable<Cat>> GetAllCats(string dataUrl);
-        void ResetDataBaseFromApi(string dataUrl);
-        Task<Cat> GetCatById(string dataUrl, string id);
-        Task<(Cat, Cat)> GetRandomTwoCats(string dataUrl);
+        Task<IEnumerable<Cat>> GetAllCats();
+        Task ResetDataBaseFromApi(string dataUrl);
+        Task<Cat> GetCatById(string id);
+        Task<IEnumerable<Cat>> GetRandomTwoCats();
+        Task<Cat> UpdateCat(Cat cat);
     }
 }
