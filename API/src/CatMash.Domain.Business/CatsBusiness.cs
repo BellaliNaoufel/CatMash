@@ -73,6 +73,9 @@ namespace CatMash.Domain.Business
         {
             var catsList = await GetAllCats();
 
+            if (!catsList.Any())
+                return Enumerable.Empty<Cat>();
+
             Random random = new Random();
 
             var firstItemIndex = random.Next(0, catsList.Count() - 1);
@@ -87,9 +90,10 @@ namespace CatMash.Domain.Business
             return new[] { catsList.ElementAt(firstItemIndex), catsList.ElementAt(secondItemIndex) };
         }
 
-        public Task<Cat> UpdateCat(Cat cat)
+        public async Task UpdateCat(Cat catToUpdate, Cat cat)
         {
-            throw new NotImplementedException();
+            catToUpdate.Score = cat.Score;
+            await _unitOfWork.CommitAsync();
         }
     }
 }

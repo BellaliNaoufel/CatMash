@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using CatMash.Api;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,8 @@ namespace CatMash.Front.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
 
             // configure api versionning

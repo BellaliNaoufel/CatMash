@@ -4,5 +4,38 @@
         <name>CatMash.Api</name>
     </assembly>
     <members>
+        <member name="M:CatMash.Api.Controllers.V1._0.CatController.ResetDataBaseFromApi">
+            <summary>
+            Initialize database (TODO: Authorization: Admin role)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CatMash.Api.Controllers.V1._0.CatController.GetCatById(System.String)">
+            <summary>
+            Get cat by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CatMash.Api.Controllers.V1._0.CatController.GetAllCats">
+            <summary>
+            Get all cats
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CatMash.Api.Controllers.V1._0.CatController.GetRandomTwoCats">
+            <summary>
+            Get two cats random
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CatMash.Api.Controllers.V1._0.CatController.UpdateCat(System.String,CatMash.Api.Models.CatModel)">
+            <summary>
+            Update cat
+            </summary>
+            <param name="id"></param>
+            <param name="catModel"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
