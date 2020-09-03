@@ -8,6 +8,6 @@ namespace CatMash.Domain.Interface.Repository
 {
     public interface ICatRepository: IRepository<Cat>
     {
-        Task<Cat> GetCatByIdAsync(string id);
+        Task<Cat> GetByIdAsync(string id);
     }
 }

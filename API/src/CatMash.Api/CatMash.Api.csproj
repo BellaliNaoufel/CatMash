@@ -36,5 +36,11 @@
     <ProjectReference Include="..\CatMash.Infrastructure.Data\CatMash.Infrastructure.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="CatMash.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>
