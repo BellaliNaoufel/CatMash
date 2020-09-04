@@ -1,9 +1,6 @@
 ﻿using CatMash.Domain.Entities.DTO;
 using CatMash.Infrastructure.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CatMash.Infrastructure.Data.Context
 {

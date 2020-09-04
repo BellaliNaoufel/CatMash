@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using CatMash.Api.Models;
 using CatMash.Api.Models.Requests;
 using CatMash.Api.Models.Responses;
-using CatMash.Api.Validation;
 using CatMash.Domain.Entities.DTO;
 using CatMash.Domain.Interface.Business;
 using CatMash.Front.Options;
@@ -25,8 +23,8 @@ namespace CatMash.Api.Controllers.V1._0
         private readonly ILogger<CatController> _logger;
         private readonly IMapper _mapperService;
 
-        public CatController(ICatsBusiness catsBusiness, 
-            IOptions<CatsApiSettings> catsApiSetting, 
+        public CatController(ICatsBusiness catsBusiness,
+            IOptions<CatsApiSettings> catsApiSetting,
             ILogger<CatController> logger,
             IMapper mapperService)
         {
@@ -101,7 +99,7 @@ namespace CatMash.Api.Controllers.V1._0
 
             if (twoCats.Count() < 2)
                 return NotFound();
-            
+
             var twoCatsModel = _mapperService.Map<IEnumerable<Cat>, IEnumerable<CatResponseModel>>(twoCats);
 
             return Ok(twoCatsModel);
@@ -122,7 +120,7 @@ namespace CatMash.Api.Controllers.V1._0
 
             if (catToUpdate == null)
                 return NotFound();
-            
+
             var cat = _mapperService.Map<CatRequestModel, Cat>(catModel);
 
             await _catsBusiness.UpdateCat(catToUpdate, cat);

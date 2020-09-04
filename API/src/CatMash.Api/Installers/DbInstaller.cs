@@ -1,11 +1,9 @@
-﻿
-using CatMash.Domain.Interface;
+﻿using CatMash.Domain.Interface;
 using CatMash.Infrastructure.Data;
 using CatMash.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 
 namespace CatMash.Front.Installers
 {
