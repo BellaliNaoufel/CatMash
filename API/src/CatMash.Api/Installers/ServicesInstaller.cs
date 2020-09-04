@@ -1,5 +1,4 @@
 ﻿using CatMash.Domain.Business;
-using CatMash.Domain.Interface;
 using CatMash.Domain.Interface.Business;
 using CatMash.Front.Options;
 using Microsoft.Extensions.Configuration;

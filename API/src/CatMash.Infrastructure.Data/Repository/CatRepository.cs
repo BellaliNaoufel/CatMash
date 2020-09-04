@@ -12,6 +12,7 @@ namespace CatMash.Infrastructure.Data.Repository
         {
             get { return Context as CatMashDbContext; }
         }
+
         public CatRepository(CatMashDbContext context)
        : base(context) { }
 

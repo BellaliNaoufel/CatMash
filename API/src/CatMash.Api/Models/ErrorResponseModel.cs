@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CatMash.Api.Models
+﻿namespace CatMash.Api.Models
 {
-   public class ErrorResponseModel
+    public class ErrorResponseModel
     {
         public string FieldName { get; set; }
 

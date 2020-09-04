@@ -4,7 +4,6 @@ using CatMash.Domain.Interface.Business;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -30,7 +29,6 @@ namespace CatMash.Domain.Business
 
         public async Task ResetDataBaseFromApi(string dataUrl)
         {
-
             var catListFromDb = await _unitOfWork.catRepository.GetAllAsync();
 
             _unitOfWork.catRepository.RemoveRange(catListFromDb);
@@ -58,7 +56,6 @@ namespace CatMash.Domain.Business
                     var images = JsonConvert.DeserializeObject<ApiResponse>(apiResult).Images;
 
                     return images.Select(x => new Cat { Id = x.Id, Url = x.Url, Score = 0 });
-
                 }
                 return null;
             }
