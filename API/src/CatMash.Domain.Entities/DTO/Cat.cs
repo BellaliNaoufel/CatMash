@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CatMash.Domain.Entities.DTO
+﻿namespace CatMash.Domain.Entities.DTO
 {
     public class Cat
     {

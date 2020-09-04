@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CatMash.Infrastructure.Data.Repository
@@ -17,6 +16,7 @@ namespace CatMash.Infrastructure.Data.Repository
         {
             this.Context = context;
         }
+
         public async Task AddAsync(TEntity entity)
         {
             await Context.Set<TEntity>().AddAsync(entity);

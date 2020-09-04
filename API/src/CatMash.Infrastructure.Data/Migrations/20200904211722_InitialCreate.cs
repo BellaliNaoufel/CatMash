@@ -2,7 +2,7 @@
 
 namespace CatMash.Infrastructure.Data.Migrations
 {
-    public partial class InitilaMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,6 +13,7 @@ namespace CatMash.Infrastructure.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     Url = table.Column<string>(maxLength: 1000, nullable: false),
                     Score = table.Column<int>(nullable: false, defaultValueSql: "0")
+                        .Annotation("Sqlite:Autoincrement", true)
                 },
                 constraints: table =>
                 {

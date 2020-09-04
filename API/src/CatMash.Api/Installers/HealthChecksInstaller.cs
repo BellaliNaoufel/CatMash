@@ -1,14 +1,14 @@
-﻿using CatMash.Front.Extensions;
+﻿using CatMash.Front.Installers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CatMash.Front.Installers
+namespace CatMash.Api.Installers
 {
-    public class SwaggerInstaller : IInstaller
+    public class HealthChecksInstaller : IInstaller
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSwaggerDocumentation();
+            services.AddHealthChecks(); // TODO: Add somes healthchecks
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using CatMash.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,7 +45,9 @@ namespace CatMash.Api.Filters
 
     public class ErrorResponse
     {
-        public ErrorResponse() { }
+        public ErrorResponse()
+        {
+        }
 
         public ErrorResponse(ErrorResponseModel error)
         {
