@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CatMash.Api.Models;
+using CatMash.Api.Models.Requests;
+using CatMash.Api.Models.Responses;
 using CatMash.Api.Validation;
 using CatMash.Domain.Entities.DTO;
 using CatMash.Domain.Interface.Business;
@@ -35,7 +37,7 @@ namespace CatMash.Api.Controllers.V1._0
         }
 
         /// <summary>
-        /// Initialize database (TODO: Authorization: Admin role)
+        /// Reset database
         /// </summary>
         /// <returns></returns>
         //[ApiExplorerSettings(IgnoreApi = true)]
@@ -54,14 +56,14 @@ namespace CatMash.Api.Controllers.V1._0
         [HttpGet(("api/v{version:apiVersion}/cats/{id}"))]
         [ProducesResponseType(typeof(Cat), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CatModel>> GetCatById([FromRoute] string id)
+        public async Task<ActionResult<CatResponseModel>> GetCatById([FromRoute] string id)
         {
             var cat = await _catsBusiness.GetCatById(id);
 
             if (cat == null)
                 return NotFound();
 
-            var catModel = _mapperService.Map<Cat, CatModel>(cat);
+            var catModel = _mapperService.Map<Cat, CatResponseModel>(cat);
 
             return Ok(catModel);
         }
@@ -71,16 +73,17 @@ namespace CatMash.Api.Controllers.V1._0
         /// </summary>
         /// <returns></returns>
         [HttpGet(("api/v{version:apiVersion}/cats"))]
-        [ProducesResponseType(typeof(Cat), StatusCodes.Status200OK)]
+        [ResponseCache(Duration = 30)]
+        [ProducesResponseType(typeof(CatResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<CatModel>>> GetAllCats()
+        public async Task<ActionResult<IEnumerable<CatResponseModel>>> GetAllCats()
         {
             var cats = await _catsBusiness.GetAllCats();
 
             if (!cats.Any())
                 return NotFound();
 
-            var catsModel = _mapperService.Map<IEnumerable<Cat>, IEnumerable<CatModel>>(cats);
+            var catsModel = _mapperService.Map<IEnumerable<Cat>, IEnumerable<CatResponseModel>>(cats);
 
             return Ok(catsModel);
         }
@@ -90,16 +93,16 @@ namespace CatMash.Api.Controllers.V1._0
         /// </summary>
         /// <returns></returns>
         [HttpGet(("api/v{version:apiVersion}/cats/random"))]
-        [ProducesResponseType(typeof(Cat), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CatResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<CatModel>>> GetRandomTwoCats()
+        public async Task<ActionResult<IEnumerable<CatResponseModel>>> GetRandomTwoCats()
         {
             var twoCats = await _catsBusiness.GetRandomTwoCats();
 
             if (twoCats.Count() < 2)
                 return NotFound();
             
-            var twoCatsModel = _mapperService.Map<IEnumerable<Cat>, IEnumerable<CatModel>>(twoCats);
+            var twoCatsModel = _mapperService.Map<IEnumerable<Cat>, IEnumerable<CatResponseModel>>(twoCats);
 
             return Ok(twoCatsModel);
         }
@@ -111,24 +114,20 @@ namespace CatMash.Api.Controllers.V1._0
         /// <param name="catModel"></param>
         /// <returns></returns>
         [HttpPut(("api/v{version:apiVersion}/cats/{id}"))]
-        [ProducesResponseType(typeof(Cat), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CatResponseModel), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> UpdateCat([FromRoute] string id, [FromBody] CatModel catModel)
+        public async Task<ActionResult> UpdateCat([FromRoute] string id, [FromBody] CatRequestModel catModel)
         {
-            var validation = new CatModelValidator();
-            var validationResult = await validation.ValidateAsync(catModel);
-            if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
-
             var catToUpdate = await _catsBusiness.GetCatById(id);
 
             if (catToUpdate == null)
                 return NotFound();
-
-            var cat = _mapperService.Map<CatModel, Cat>(catModel);
+            
+            var cat = _mapperService.Map<CatRequestModel, Cat>(catModel);
 
             await _catsBusiness.UpdateCat(catToUpdate, cat);
 
-            var updatedCatModel = _mapperService.Map<CatModel>(cat);
+            var updatedCatModel = _mapperService.Map<CatResponseModel>(cat);
 
             return Ok(updatedCatModel);
         }

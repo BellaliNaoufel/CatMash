@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CatMash.Api;
+using CatMash.Api.Filters;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,7 +17,12 @@ namespace CatMash.Front.Installers
         {
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.EnableEndpointRouting = false;
+                options.Filters.Add<ValidationFilter>();
+            })
+            .AddFluentValidation(mvcConfiguration => mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             // configure api versionning
             services.AddVersionedApiExplorer(
