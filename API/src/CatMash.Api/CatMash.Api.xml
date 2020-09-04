@@ -6,7 +6,7 @@
     <members>
         <member name="M:CatMash.Api.Controllers.V1._0.CatController.ResetDataBaseFromApi">
             <summary>
-            Initialize database (TODO: Authorization: Admin role)
+            Reset database
             </summary>
             <returns></returns>
         </member>
@@ -29,13 +29,18 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CatMash.Api.Controllers.V1._0.CatController.UpdateCat(System.String,CatMash.Api.Models.CatModel)">
+        <member name="M:CatMash.Api.Controllers.V1._0.CatController.UpdateCat(System.String,CatMash.Api.Models.Requests.CatRequestModel)">
             <summary>
             Update cat
             </summary>
             <param name="id"></param>
             <param name="catModel"></param>
             <returns></returns>
+        </member>
+        <member name="T:CatMash.Api.Middlewares.HttpExceptionMiddleware">
+            <summary>
+            HttpExceptionMiddleware Class
+            </summary>
         </member>
     </members>
 </doc>

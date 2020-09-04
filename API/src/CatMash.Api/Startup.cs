@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CatMash.Api.Middlewares;
 using CatMash.Front.Extensions;
 using CatMash.Infrastructure.Data.Context;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +42,7 @@ namespace CatMash.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
             context.Database.EnsureCreated();
 
             app.UseHttpsRedirection();
@@ -50,6 +52,8 @@ namespace CatMash.Api
             app.UseAuthorization();
 
             loggerFactory.AddSerilog();
+
+            app.UseHttpExceptionMiddleware();
 
             app.UseSwaggerDocumentation(provider);
 

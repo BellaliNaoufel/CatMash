@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CatMash.Api.Models;
+using CatMash.Api.Models.Requests;
+using CatMash.Api.Models.Responses;
 using CatMash.Domain.Entities.DTO;
 using System;
 using System.Collections.Generic;
@@ -12,8 +14,11 @@ namespace CatMash.Api.Mapping
     {
         public MappingCat()
         {
-            CreateMap<Cat, CatModel>();
-            CreateMap<CatModel, Cat>();
+            CreateMap<Cat, CatResponseModel>();
+            CreateMap<CatResponseModel, Cat>();
+
+            CreateMap<Cat, CatRequestModel>();
+            CreateMap<CatRequestModel, Cat>();
         }
     }
 }

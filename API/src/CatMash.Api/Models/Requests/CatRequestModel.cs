@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CatMash.Api.Models
+namespace CatMash.Api.Models.Requests
 {
-    public class CatModel
+    public class CatRequestModel
     {
-        public string Id { get; set; }
         public string Url { get; set; }
         public int Score { get; set; }
     }
