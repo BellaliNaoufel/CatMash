@@ -23,6 +23,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CatMash.Api.Controllers.V1._0.CatController.GetAllCats(System.Nullable{System.Int32})">
+            <summary>
+            Get all cats (paged)
+            </summary>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
         <member name="M:CatMash.Api.Controllers.V1._0.CatController.GetRandomTwoCats">
             <summary>
             Get two cats random
