@@ -1,7 +1,8 @@
-    <p-table [value]="cats" styleClass="p-datatable-striped">
+<p-panel header="Classement des chats">
+   <p-table [value]="cats" styleClass="p-datatable-striped">
         <ng-template pTemplate="header">
             <tr>
-                <th>ID</th>
+                <th>CODE</th>
                 <th>URL</th>
                 <th>SCORE</th>
             </tr>
@@ -9,10 +10,16 @@
         <ng-template pTemplate="body" let-cat>
             <tr>
                 <td>{{cat.id}}</td>
-                <td><img [src]='cat.url' width="50" height="50" class="p-shadow-4" /></td>
-                <td>{{cat.score}}</td>
+                <td><img [src]='cat.url' class="p-shadow-4" class="img" (click)="showDialog(cat.url)"/></td>
+                <td><p-progressBar [value]="cat.score" unit=" Votes"></p-progressBar></td>
             </tr>
         </ng-template>
     </p-table>
+</p-panel>
+
+<p-dialog header="Votez pour moi" [(visible)]="display">
+    <img [src]='selectedCatUrl' class="p-shadow-4" class="imgmodal"/>
+</p-dialog>
+
 
 

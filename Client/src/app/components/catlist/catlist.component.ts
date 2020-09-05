@@ -15,6 +15,8 @@ export class CatlistComponent implements OnInit {
     private router: Router) { }
 
   cats: CatModel[];
+  display: boolean = false;
+  selectedCatUrl: string;
 
   ngOnInit(): void {
     this.getAllCats();
@@ -31,4 +33,9 @@ export class CatlistComponent implements OnInit {
           console.log(error);
         });
   }
+
+  showDialog(selectedCatUrl: string) {
+    this.selectedCatUrl=selectedCatUrl;
+    this.display = true;
+}
 }

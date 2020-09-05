@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
     this.items = [
       {
         label: 'Sondage',
+        icon: 'pi pi-fw pi-align-justify',
         items: [{
           label: 'Meilleur chat',
           icon: 'pi pi-fw pi-star',
@@ -23,7 +24,16 @@ export class AppComponent implements OnInit {
           ]
         }
         ]
-      }
+      },
+      {
+        label: 'Paramètres',
+        icon: 'pi pi-fw pi-cog',
+        items: [{
+          label: 'Reset DB',
+          icon: 'pi pi-fw pi-arrow-circle-down'
+        }
+        ]
+    }
     ];
   }
 }
