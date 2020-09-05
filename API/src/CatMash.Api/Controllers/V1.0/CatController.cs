@@ -22,6 +22,7 @@ namespace CatMash.Api.Controllers.V1._0
         private readonly CatsApiSettings _catsApiSettings;
         private readonly ILogger<CatController> _logger;
         private readonly IMapper _mapperService;
+        private const int PageSize = 10;
 
         public CatController(ICatsBusiness catsBusiness,
             IOptions<CatsApiSettings> catsApiSetting,
@@ -77,6 +78,27 @@ namespace CatMash.Api.Controllers.V1._0
         public async Task<ActionResult<IEnumerable<CatResponseModel>>> GetAllCats()
         {
             var cats = await _catsBusiness.GetAllCats();
+
+            if (!cats.Any())
+                return NotFound();
+
+            var catsModel = _mapperService.Map<IEnumerable<Cat>, IEnumerable<CatResponseModel>>(cats);
+
+            return Ok(catsModel);
+        }
+
+        /// <summary>
+        /// Get all cats (ordred and paged)
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        [HttpGet(("api/v{version:apiVersion}/cats/{page:int?}"))]
+        [ResponseCache(Duration = 30)]
+        [ProducesResponseType(typeof(CatResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<CatResponseModel>>> GetAllCats([FromRoute]int? page = 1)
+        {
+            var cats = await _catsBusiness.GetOrdredAndPagedCatsAsync(page.Value, PageSize);
 
             if (!cats.Any())
                 return NotFound();
