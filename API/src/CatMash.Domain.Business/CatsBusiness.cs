@@ -92,5 +92,10 @@ namespace CatMash.Domain.Business
             catToUpdate.Score = cat.Score;
             await _unitOfWork.CommitAsync();
         }
+
+        public async Task<IEnumerable<Cat>> GetOrdredAndPagedCatsAsync(int pageNumber, int pageSize)
+        {
+            return await _unitOfWork.catRepository.GetOrdredAndPagedCatsAsync(pageNumber, pageSize);
+        }
     }
 }

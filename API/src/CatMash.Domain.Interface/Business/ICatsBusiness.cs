@@ -15,5 +15,7 @@ namespace CatMash.Domain.Interface.Business
         Task<IEnumerable<Cat>> GetRandomTwoCats();
 
         Task UpdateCat(Cat catToUpdate, Cat cat);
+
+        Task<IEnumerable<Cat>> GetOrdredAndPagedCatsAsync(int pageNumber, int pageSize);
     }
 }
