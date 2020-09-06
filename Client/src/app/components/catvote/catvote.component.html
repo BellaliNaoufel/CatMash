@@ -1,3 +1,6 @@
 <p-panel header="Votez pour le plus beau">
-    <router-outlet></router-outlet>
+    <div class="p-grid">
+        <div class="p-col" style="text-align: center;"><img [src]='twoCats[0]?.url' class="imgvote" (click)="voteCat(twoCats[0])"/></div>
+        <div class="p-col" style="text-align: center;"><img [src]='twoCats[1]?.url' class="imgvote" (click)="voteCat(twoCats[1])"/></div>
+    </div>
 </p-panel>

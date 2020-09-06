@@ -26,7 +26,7 @@ export class CatlistComponent implements OnInit {
     this.catService.getAllCats()
       .subscribe(
         data => {
-          this.cats = data;
+          this.cats = data.sort((a, b) => {return b.score - a.score;});
           console.log(data);
         },
         error => {
