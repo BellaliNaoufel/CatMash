@@ -3,6 +3,7 @@
 Technologies utilisés:
 
 * net core 3.1
+* Swagger open api
 * angular 10
 * PrimeNG 10
 * docker (pour le deploiement sur le serveur heroku)
