@@ -15,8 +15,32 @@ export class CatService {
 
   getAllCats(): Observable<CatModel[]> {
     return this.http
-      .get<CatModel[]>(baseUrl + 'cats')
+      .get<CatModel[]>(`${baseUrl}cats`)
       .pipe(catchError(this.handelError('getAllCats', [])));
+  }
+
+  getRandomTwoCats(): Observable<CatModel[]> {
+    return this.http
+      .get<CatModel[]>(`${baseUrl}cats/random`)
+      .pipe(catchError(this.handelError('getRandomTwoCats', [])));
+  }
+
+  updateCat(cat: CatModel): Observable<any> {
+    return this.http
+      .put(
+        baseUrl + `cats/${cat.id}`,
+        cat
+      )
+      .pipe(
+        tap(_ => console.log(`updated cat id=${cat.id}`)),
+        catchError(this.handelError('updateCat'))
+      );
+  }
+
+  resetDatabase(): Observable<any> {
+    return this.http
+    .post(`${baseUrl}reset`, null)
+    .pipe(catchError(this.handelError('resetDatabase', [])));
   }
 
   private handelError<T>(operation = 'operation', result?: T) {

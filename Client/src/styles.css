@@ -1,0 +1,42 @@
+.img {
+    cursor: zoom-in;
+    width: 65px;
+    height: 65px;
+    border:2px solid #fff;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+  }
+
+  .imgmodal {
+    border:2px solid #fff;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+  }
+
+  .imgvote {
+    cursor: default;
+    width: 500px;
+    height: 500px;
+    border:2px solid #fff;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+  }
+
+  .imgvote:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    -webkit-transform: translate(-2%, -2%);
+    -ms-transform: translate(-2%, -2%);
+    transform: translate(-2%, -2%);
+    text-align: center;
+  }
+  
+
+  
+  

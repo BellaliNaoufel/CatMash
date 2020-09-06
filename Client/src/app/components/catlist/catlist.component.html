@@ -1,18 +1,32 @@
-    <p-table [value]="cats" styleClass="p-datatable-striped">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>ID</th>
-                <th>URL</th>
-                <th>SCORE</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-cat>
-            <tr>
-                <td>{{cat.id}}</td>
-                <td><img [src]='cat.url' width="50" height="50" class="p-shadow-4" /></td>
-                <td>{{cat.score}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
+<p-panel header="Classement des chats">
+    <p-table styleClass="p-datatable-sm" [value]="cats" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5,10,25,50]">
+    <ng-template pTemplate="header">
+    <tr>
+            <th>CODE</th>
+            <th>URL</th>
+            <th>SCORE</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cat>
+        <tr>
+            <td>{{cat.id}}</td>
+            <td><img [src]='cat.url' class="img" (click)="showDialog(cat.url)"/></td>
+            <td><p-progressBar [value]="cat.score" unit=" Votes"></p-progressBar></td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-table>
+</p-panel>
+
+<p-dialog header="Votez pour moi" [(visible)]="display">
+    <img [src]='selectedCatUrl' class="imgmodal"/>
+</p-dialog>
+
 
 
