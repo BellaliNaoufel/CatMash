@@ -72,7 +72,7 @@ namespace CatMash.Api.Controllers.V1._0
         /// </summary>
         /// <returns></returns>
         [HttpGet(("api/v{version:apiVersion}/cats"))]
-        [ResponseCache(Duration = 30)]
+        //[ResponseCache(Duration = 60)]
         [ProducesResponseType(typeof(CatResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<CatResponseModel>>> GetAllCats()
@@ -93,7 +93,7 @@ namespace CatMash.Api.Controllers.V1._0
         /// <param name="page"></param>
         /// <returns></returns>
         [HttpGet(("api/v{version:apiVersion}/cats/{page:int?}"))]
-        [ResponseCache(Duration = 30)]
+        //[ResponseCache(Duration = 60)]
         [ProducesResponseType(typeof(CatResponseModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<CatResponseModel>>> GetAllCats([FromRoute]int? page = 1)

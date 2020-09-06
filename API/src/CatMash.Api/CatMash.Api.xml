@@ -25,7 +25,7 @@
         </member>
         <member name="M:CatMash.Api.Controllers.V1._0.CatController.GetAllCats(System.Nullable{System.Int32})">
             <summary>
-            Get all cats (paged)
+            Get all cats (ordred and paged)
             </summary>
             <param name="page"></param>
             <returns></returns>
