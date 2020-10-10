@@ -58,7 +58,7 @@ namespace CatMash.Api.Tests
 
             Check.That(actual).IsNotNull();
 
-            // TODO: resolve automapper problem
+            // TODO: resolve automapper problems
         }
     }
 }
